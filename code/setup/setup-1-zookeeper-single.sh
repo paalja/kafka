@@ -1,4 +1,4 @@
-#!/bin/bash
+2#!/bin/bash
 # Packages
 sudo apt-get update && \
       sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat
@@ -55,3 +55,6 @@ nc -vz localhost 2181
 echo "ruok" | nc localhost 2181 ; echo
 # check the logs
 cat logs/zookeeper.out
+
+
+PJA 
