@@ -1,6 +1,6 @@
 #!/bin/bash
 #/etc/init.d/zookeeper
-DAEMON_PATH=/home/ubuntu/kafka/bin
+DAEMON_PATH=/home/paal/kafka_2.13-2.5.0/bin
 DAEMON_NAME=zookeeper
 # Check that networking is up.
 #[ ${NETWORKING} = "no" ] && exit 0
@@ -17,7 +17,7 @@ case "$1" in
             echo "Zookeeper is already running";
         else
           echo "Starting $DAEMON_NAME";
-          $DAEMON_PATH/zookeeper-server-start.sh -daemon /home/ubuntu/kafka/config/zookeeper.properties
+          $DAEMON_PATH/zookeeper-server-start.sh -daemon /home/paal/kafka_2.13-2.5.0/config/zookeeper.properties
         fi
         ;;
   stop)
