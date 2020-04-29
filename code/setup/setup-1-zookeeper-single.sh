@@ -1,7 +1,7 @@
 #!/bin/bash
 # Packages
 sudo apt-get update && \
-      sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat
+      sudo apt-get -y install wget ca-certificates zip net-tools vim vi tar netcat
 
 # Java Open JDK 8
 sudo apt-get -y install default-jdk
@@ -39,7 +39,7 @@ ls /
 echo "ruok" | nc localhost 2181 ; echo
 
 # Install Zookeeper boot scripts
-sudo nano /etc/init.d/zookeeper
+sudo vi /etc/init.d/zookeeper
 sudo chmod +x /etc/init.d/zookeeper
 sudo chown root:root /etc/init.d/zookeeper
 # you can safely ignore the warning
