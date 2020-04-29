@@ -23,7 +23,7 @@ for i in range(2):
     datetime_obj = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     datetime_obj = datetime.now().strftime('%M:%S')
     string = bytes(datetime_obj, encoding='utf-8')
-    future = producer.send(topic, b'tirsdag ' + string)
+    future = producer.send(topic, b'onsdag ' + string)
     result = future.get(timeout=1)
     print(i)
     print(result)
