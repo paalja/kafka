@@ -1,7 +1,7 @@
 #!/bin/bash
 # Packages
 sudo apt-get update && \
-      sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat
+      sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat tmux
 
 # Java Open JDK 8
 sudo apt-get -y install default-jdk
@@ -12,12 +12,15 @@ sudo sysctl vm.swappiness=1
 echo 'vm.swappiness=1' | sudo tee --append /etc/sysctl.conf
 
 # Add hosts entries (mocking DNS) - put relevant IPs here
-echo "172.31.9.1 kafka1
-172.31.9.1 zookeeper1
-172.31.19.230 kafka2
-172.31.19.230 zookeeper2
-172.31.35.20 kafka3
-172.31.35.20 zookeeper3" | sudo tee --append /etc/hosts
+echo "10.80.0.115 kafka001
+10.80.0.115 zookeeper001
+10.80.0.116 kafka002
+10.80.0.116 zookeeper002
+10.80.0.117 kafka003
+10.80.0.117 zookeeper003" | sudo tee --append /etc/hosts
+
+# No renaming of windows in tmux
+echo "set-option -g allow-rename off" | tee --append ~/.tmux.conf
 
 # download Zookeeper and Kafka. Recommended is latest Kafka (0.10.2.1) and Scala 2.12
 wget http://apache.mirror.digitalpacific.com.au/kafka/0.10.2.1/kafka_2.12-0.10.2.1.tgz
