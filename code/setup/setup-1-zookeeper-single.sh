@@ -48,13 +48,8 @@ ls /
 echo "ruok" | nc localhost 2181 ; echo
 
 # Install Zookeeper boot scripts
-sudo vi /etc/init.d/zookeeper
-sudo chmod +x /etc/init.d/zookeeper
-sudo chown root:root /etc/init.d/zookeeper
-# you can safely ignore the warning
-sudo update-rc.d zookeeper defaults
-# stop zookeeper
-sudo service zookeeper stop
+zookeeper.service file
+
 # verify it's stopped
 nc -vz localhost 2181
 # start zookeeper
