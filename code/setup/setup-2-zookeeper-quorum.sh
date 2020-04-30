@@ -18,10 +18,10 @@ cat /home/f_etlbroker/kafka/logs/zookeeper.out | head -100
 nc -vz localhost 2181
 nc -vz localhost 2888
 nc -vz localhost 3888
-echo "ruok" | nc zookeeper1 2181 ; echo
-echo "ruok" | nc zookeeper2 2181 ; echo
-echo "ruok" | nc zookeeper3 2181 ; echo
-echo "stat" | nc localhost 2181 ; echo
+echo "ruok" | nc zookeeper1 2181 ; echo; echo "ruok" | nc zookeeper2 2181 ; echo ; echo "ruok" | nc zookeeper3 2181 ; echo
+echo "stat" | nc zookeeper1 2181 ; echo; echo "stat" | nc zookeeper2 2181 ; echo ; echo "stat" | nc zookeeper3 2181 ; echo
+echo "mntr" | nc zookeeper1 2181 ; echo; echo "mntr" | nc zookeeper2 2181 ; echo ; echo "mntr" | nc zookeeper3 2181 ; echo
+
 bin/zookeeper-shell.sh localhost:2181
 # not happy
 ls /
