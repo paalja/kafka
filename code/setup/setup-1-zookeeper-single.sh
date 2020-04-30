@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# add in path
+echo 'export PATH="$PATH:/home/f_etlbroker/kafka/bin/"' | tee --append ~/.bashrc
+
 # Packages
 sudo apt-get update && \
       sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat tmux
