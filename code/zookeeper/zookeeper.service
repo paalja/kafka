@@ -1,0 +1,15 @@
+# /etc/systemd/system/zookeeper.service
+
+[Unit]
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=f_etlbroker
+ExecStart=/home/f_etlbroker/kafka/bin/zookeeper-server-start.sh /home/f_etlbroker/kafka/config/zookeeper.properties
+ExecStop=/home/f_etlbroker/kafka/bin/zookeeper-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
