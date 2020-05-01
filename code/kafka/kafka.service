@@ -1,0 +1,17 @@
+# vi /etc/systemd/system/kafka.service
+sudo systemctl enable kafka
+sudo systemctl start kafka
+
+[Unit]
+Requires=zookeeper.service
+After=zookeeper.service
+
+[Service]
+Type=simple
+User=f_etlbroker
+ExecStart=/bin/sh -c '/home/f_etlbroker/kafka/bin/kafka-server-start.sh /home/f_etlbroker/kafka/config/server.properties > /home/f_etlbroker/kafka/logs/kafka.log 2>&1'
+ExecStop=/home/f_etlbroker/kafka/bin/kafka-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target

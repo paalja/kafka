@@ -1,4 +1,10 @@
 #!/bin/bash
+
+sudo timedatectl set-timezone Europe/Oslo
+
+# add in path
+echo 'export PATH="$PATH:/home/f_etlbroker/kafka/bin/"' | tee --append ~/.bashrc
+
 # Packages
 sudo apt-get update && \
       sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat tmux
@@ -42,13 +48,8 @@ ls /
 echo "ruok" | nc localhost 2181 ; echo
 
 # Install Zookeeper boot scripts
-sudo vi /etc/init.d/zookeeper
-sudo chmod +x /etc/init.d/zookeeper
-sudo chown root:root /etc/init.d/zookeeper
-# you can safely ignore the warning
-sudo update-rc.d zookeeper defaults
-# stop zookeeper
-sudo service zookeeper stop
+zookeeper.service file
+
 # verify it's stopped
 nc -vz localhost 2181
 # start zookeeper
@@ -58,6 +59,8 @@ nc -vz localhost 2181
 echo "ruok" | nc localhost 2181 ; echo
 # check the logs
 cat logs/zookeeper.out
+cat /home/f_etlbroker/kafka/logs/server.log
+tail -f /home/f_etlbroker/kafka/logs/server.log
 
 
 PJA 

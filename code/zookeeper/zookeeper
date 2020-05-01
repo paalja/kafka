@@ -1,6 +1,7 @@
 #!/bin/bash
 #/etc/init.d/zookeeper
-DAEMON_PATH=/home/f_etlbroker/kafka/bin
+RUN_THIS=/bin/su f_etlbroker -c '/home/f_etlbroker/kafka/bin/zookeeper-server-start.sh -daemon /home/f_etlbroker/kafka/config/zookeeper.properties'
+DAEMON_PATH=/home/f_etlbroker/kafka/bin/
 DAEMON_NAME=zookeeper
 # Check that networking is up.
 #[ ${NETWORKING} = "no" ] && exit 0
@@ -17,7 +18,8 @@ case "$1" in
             echo "Zookeeper is already running";
         else
           echo "Starting $DAEMON_NAME";
-          $DAEMON_PATH/zookeeper-server-start.sh -daemon /home/f_etlbroker/kafka/config/zookeeper.properties
+          #$DAEMON_PATH/zookeeper-server-start.sh -daemon /home/f_etlbroker/kafka/config/zookeeper.properties
+          $RUN_THIS
         fi
         ;;
   stop)
