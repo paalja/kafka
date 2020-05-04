@@ -36,6 +36,8 @@ bin/kafka-topics.sh --zookeeper zookeeper1:2181/kafka --config min.insync.replic
 # read the topic on broker 1 by connecting to broker 2!
 bin/kafka-console-consumer.sh --bootstrap-server kafka2:9092 --topic first_topic --from-beginning
 
+# read topic properties
+kafka-topics.sh --zookeeper zookeeper1:2181/kafka --describe --topic paloalto
 
 # DO THE SAME FOR BROKER 3
 

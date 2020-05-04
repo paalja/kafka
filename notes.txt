@@ -10,6 +10,7 @@ kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partit
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic second_topic --create --partitions 6 --replication-factor 1
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
+kafka-topics.sh --list --zookeeper localhost:2181/kafka
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic second_topic --delete
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --describe --under-replicated-partitions
 
@@ -21,7 +22,11 @@ kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic --pro
 
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group myapp
- 
+
+# List consumer groups 
 kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --list
 
 kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic paal
+
+# read topic properties
+kafka-topics.sh --zookeeper zookeeper1:2181/kafka --describe --topic paloalto

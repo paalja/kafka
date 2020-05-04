@@ -7,7 +7,7 @@ echo 'export PATH="$PATH:/home/f_etlbroker/kafka/bin/"' | tee --append ~/.bashrc
 
 # Packages
 sudo apt-get update && \
-      sudo apt-get -y install wget ca-certificates zip net-tools vim nano tar netcat tmux
+      sudo yum -y install wget ca-certificates zip net-tools vim nano tar netcat tmux
 
 # Java Open JDK 8
 sudo apt-get -y install default-jdk
@@ -23,7 +23,13 @@ echo "10.80.0.115 kafka001
 10.80.0.116 kafka002
 10.80.0.116 zookeeper002
 10.80.0.117 kafka003
-10.80.0.117 zookeeper003" | sudo tee --append /etc/hosts
+10.80.0.117 zookeeper003
+10.80.0.115 kafka1
+10.80.0.115 zookeeper1
+10.80.0.116 kafka2
+10.80.0.116 zookeeper2
+10.80.0.117 kafka3
+10.80.0.117 zookeeper3" | sudo tee --append /etc/hosts
 
 # No renaming of windows in tmux
 echo "set-option -g allow-rename off" | tee --append ~/.tmux.conf
