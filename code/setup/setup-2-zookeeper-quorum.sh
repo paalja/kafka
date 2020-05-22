@@ -22,6 +22,10 @@ echo "ruok" | nc zookeeper1 2181 ; echo; echo "ruok" | nc zookeeper2 2181 ; echo
 echo "stat" | nc zookeeper1 2181 ; echo; echo "stat" | nc zookeeper2 2181 ; echo ; echo "stat" | nc zookeeper3 2181 ; echo
 echo "mntr" | nc zookeeper1 2181 ; echo; echo "mntr" | nc zookeeper2 2181 ; echo ; echo "mntr" | nc zookeeper3 2181 ; echo
 
+echo "ruok" | nc st-linapp1101.st.statoil.no 2181 ; echo; echo "ruok" | nc st-linapp1102.st.statoil.no 2181 ; echo ; echo "ruok" | nc st-linapp1103.st.statoil.no 2181 ; echo
+echo "stat" | nc st-linapp1101.st.statoil.no 2181 ; echo; echo "stat" | nc st-linapp1102.st.statoil.no 2181 ; echo ; echo "stat" | nc st-linapp1103.st.statoil.no 2181 ; echo
+echo "mntr" | nc st-linapp1101.st.statoil.no 2181 ; echo; echo "mntr" | nc st-linapp1102.st.statoil.no 2181 ; echo ; echo "mntr" | nc st-linapp1103.st.statoil.no 2181 ; echo
+
 bin/zookeeper-shell.sh localhost:2181
 # not happy
 ls /

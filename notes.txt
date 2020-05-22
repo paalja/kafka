@@ -30,3 +30,19 @@ kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic asdf3
 
 # read topic properties
 kafka-topics.sh --zookeeper zookeeper1:2181/kafka --describe --topic paloalto
+
+# consumer lists
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group digg --describe
+
+
+kafka-consumer-groups.sh --bootstrap-server znw-linapp1027.statoil.no:9092 --list
+kafka-consumer-groups.sh --bootstrap-server znw-linapp1027.statoil.no:9093 --list --command-config /etc/kafka/kafka-tools.properties
+
+# list out consumer groups
+kafka-consumer-groups.sh --bootstrap-server st-linapp1101.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1103.st.statoil.no:9093 --list --command-config /etc/kafka/kafka-tools.properties
+kafka-consumer-groups --bootstrap-server st-linapp1101.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1103.st.statoil.no:9093 --list --command-config /etc/kafka/kafka-tools.properties
+
+/usr/bin/kafka-consumer-groups --bootstrap-server st-linapp1101.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1103.st.statoil.no:9093 --command-config /etc/kafka/kafka-tools.properties --describe --group mirror_qip-infra
+
+kafka-console-consumerh --bootstrap-server st-linapp1101.st.statoil.no:9092 --topic test --consumer.config /home/f_etlbroker/kafka/SSL/client-ssl.properties
