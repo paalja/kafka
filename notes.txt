@@ -45,4 +45,72 @@ kafka-consumer-groups --bootstrap-server st-linapp1101.st.statoil.no:9093,st-lin
 
 /usr/bin/kafka-consumer-groups --bootstrap-server st-linapp1101.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1103.st.statoil.no:9093 --command-config /etc/kafka/kafka-tools.properties --describe --group mirror_qip-infra
 
-kafka-console-consumerh --bootstrap-server st-linapp1101.st.statoil.no:9092 --topic test --consumer.config /home/f_etlbroker/kafka/SSL/client-ssl.properties
+kafka-console-consumer --bootstrap-server st-linapp1101.st.statoil.no:9092 --topic test --consumer.config /home/f_etlbroker/kafka/SSL/client-ssl.properties
+
+
+kafka-topics --zookeeper localhost:2181 --describe --topic dns_v2
+kafka-topics --zookeeper localhost:2181 --alter --topic dns_v2 --config retention.ms=86400000
+kafka-configs --zookeeper localhost:2181/kafka --alter --entity-type topics --entity-name asdf3 --add-config retention.ms=86400000
+
+
+kafka-topics --bootstrap-server st-linapp1101.st.statoil.no:9093 --command-config /etc/kafka/kafka-tools.properties --describe --group mirror_unix_ldap
+
+kafka-console-consumer.sh --zookeeper localhost:2181 --topic asa --from-beginning --max-messages 10
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic dns_v2 --max-messages 10 
+
+
+# log.retention.hours define the time a message is stored on a topic before it discards old log segments to free up space.
+# The number of hours to keep a log file before deleting it (in hours), tertiary to log.retention.ms property
+# default is 168 hours - one week
+log.retention.hours=48
+log.retention.bytes=-1
+log.cleanup.policy=delete
+
+log.retention.hours=48
+log.cleaner.enable=true
+log.cleanup.policy=delete
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+
+
+############################# Log Retention Policy #############################
+
+# The minimum age of a log file to be eligible for deletion due to age
+# this will delete data after a week
+log.retention.hours=240
+log.cleaner.enable=true
+log.cleanup.policy=delete
+
+# The interval at which log segments are checked to see if they can be deleted according
+# to the retention policies
+log.retention.check.interval.ms=300000
+
+##########################
+
+server.properties:
+log.cleaner.enable=true
+
+86400000 
+
+topic
+------
+retention.ms = 86400000 
+cleanup.policy = delete
+retention.bytes=-1
+segment.ms=5000
+
+
+kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic asa
+
+bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic asdf3 --time -1 --offsets 1 | awk -F ":" '{sum += $3} END {print sum}'
+
+
+kafka-configs --zookeeper 127.0.0.1:2181 --entity-type topics --entity-name ... --add-config retention.ms=86400000, cleanup.policy=delete
+kafka-topic.sh--zookeeper 127.0.0.1:2181/kafka --describe --topic asdf3
+kafka-configs --zookeeper localhost:2181/kafka --alter --entity-type topics --entity-name asdf3 --add-config retention.ms=86400000, cleanup.policy=delete
+
+
+kafka-topics --zookeeper 127.0.0.1:2181 --describe --topic dns_v2
+kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name dns_v2 --add-config retention.ms=86400000, cleanup.policy=delete
+kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name dns_v2 --add-config cleanup.policy=delete
