@@ -23,3 +23,14 @@ kafka-topics.sh --zookeeper zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/kafk
 
 # it should be deleted shortly:
 kafka-topics.sh --zookeeper zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/kafka --list
+
+
+
+--max-messages
+
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dns_v2 --max-messages 20
+kafka-console-consumer --bootstrap-server localhost:9092 --topic dns_v2 --max-messages 20
+
+
+BOOTSTRAP_SERVERS="SSL://st-linapp1103.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1101.st.statoil.no:9093" 
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --max-messages 1 --topic paloalto_v2 > /tmp/dns_v2
