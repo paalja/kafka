@@ -5,6 +5,8 @@ kafka-server-start.sh config/server.properties
 
 vi config/server.properties
 sudo yum install java-1.8.0-openjdk
+sudo yum install java-1.8.0-openjdk-devel (development kit)
+
 
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 1
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe
@@ -114,3 +116,19 @@ kafka-configs --zookeeper localhost:2181/kafka --alter --entity-type topics --en
 kafka-topics --zookeeper 127.0.0.1:2181 --describe --topic dns_v2
 kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name dns_v2 --add-config retention.ms=604800000, cleanup.policy=delete
 kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name dns_v2 --add-config cleanup.policy=delete
+
+BOOTSTRAP_SERVERS="SSL://st-linapp1103.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1101.st.statoil.no:9093"
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --topic paloalto_v2 --from-beginning
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --topic ibm_sp --max-messages 10
+/usr/bin/kafka-topics --zookeeper localhost:2181 --create --config retention.ms=1209600000 --replication-factor 3 --partitions 6 --topic vcenter
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --topic vcenter
+
+as root:
+ cd /etc/systemd/system/multi-user.target.wants
+ systemctl enable rsyslog_etl@ibm_sp.service
+ systemctl start rsyslog_etl@ibm_sp.service
+
+
+kafka-topics --zookeeper localhost:2181 --alter --topic dns_v2 --config retention.ms=100000
+kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name vcenter --add-config retention.ms=604800000, cleanup.policy=delete
+kafka-configs --zookeeper localhost:2181 --alter --entity-type topics --entity-name vcenter --add-config retention.ms=1000, cleanup.policy=delete

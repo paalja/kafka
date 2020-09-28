@@ -33,4 +33,5 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic dns_v2 --max-me
 
 
 BOOTSTRAP_SERVERS="SSL://st-linapp1103.st.statoil.no:9093,st-linapp1102.st.statoil.no:9093,st-linapp1101.st.statoil.no:9093" 
-/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --max-messages 1 --topic paloalto_v2 > /tmp/dns_v2
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --max-messages 1 --topic dns_v2
+/usr/bin/kafka-console-consumer --bootstrap-server ${BOOTSTRAP_SERVERS} --consumer.config /etc/kafka/kafka-tools.properties --max-messages 1 --topic paloalto_v2 
